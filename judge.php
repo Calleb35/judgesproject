@@ -21,7 +21,7 @@ $participants = $pdo->query("SELECT participants.id, participants.name,
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["participant_id"]) && isset($_POST["points"])) {
     $stmt = $pdo->prepare("INSERT INTO scores (judge_id, participant_id, points) VALUES (?, ?, ?)");
     $stmt->execute([$_SESSION["judge_id"], $_POST["participant_id"], $_POST["points"]]);
-    header("Refresh:0"); // Auto-refresh page after submission
+    //header("Refresh:0"); // Auto-refresh page after submission
 }
 ?>
 
