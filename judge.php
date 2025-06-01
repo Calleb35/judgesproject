@@ -1,9 +1,11 @@
 <?php
+
+session_start();
+
 require 'db.php';
 require 'header.php';
 loadHeader("Judges Portal");
 
-//session_start();
 if (!isset($_SESSION["judge_id"])) {
     header("Location: judge_login.php");
     exit;
@@ -21,7 +23,7 @@ $participants = $pdo->query("SELECT participants.id, participants.name,
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["participant_id"]) && isset($_POST["points"])) {
     $stmt = $pdo->prepare("INSERT INTO scores (judge_id, participant_id, points) VALUES (?, ?, ?)");
     $stmt->execute([$_SESSION["judge_id"], $_POST["participant_id"], $_POST["points"]]);
-    //header("Refresh:0"); // Auto-refresh page after submission
+    header("Refresh:0"); // Auto-refresh page after submission
 }
 ?>
 
@@ -34,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["participant_id"]) && i
             <?php endforeach; ?>
         </select>
         <input type="number" name="points" min="1" max="100" placeholder="Assign Points" class="form-control mb-2" required>
-        <button type="submit" class="btn btn-success">Submit Score</button>
+        <button type="submit" class="btn btn-succes">Submit Score</button>
     </form>
 
     <h3>Participants & Scores</h3>
